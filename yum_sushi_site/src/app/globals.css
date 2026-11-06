@@ -1,0 +1,485 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-light: var(--gold-light);
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   YUM SUSHI — Rodízio Japonês · São Paulo · Sistema de design
+   Paleta escura premium: carvão esverdeado, marfim, jade
+   (referência: parede viva do salão na Av. Cupecê)
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --radius: 0px;
+
+  /* base */
+  --background: #090C0A;
+  --surface: #0E1310;
+  --ink: #070907;
+  --foreground: #F2F1E8;
+  --ivory: #F2F1E8;
+  --cream: #E2E4D8;
+  --sand: #9AA598;
+  --muted: #151B16;
+  --muted-foreground: #9AA598;
+
+  /* ouro */
+  --gold: #5FBD83;
+  --gold-deep: #3E8E5F;
+  --gold-light: #A7E3BF;
+  --line: rgba(95, 189, 131, 0.16);
+  --line-strong: rgba(95, 189, 131, 0.34);
+
+  /* shadcn mapeados ao tema escuro */
+  --card: #0E1310;
+  --card-foreground: #F2F1E8;
+  --popover: #100d0a;
+  --popover-foreground: #F2F1E8;
+  --primary: #5FBD83;
+  --primary-foreground: #090C0A;
+  --secondary: #151B16;
+  --secondary-foreground: #E2E4D8;
+  --accent: #151B16;
+  --accent-foreground: #A7E3BF;
+  --destructive: #C0543C;
+  --border: rgba(95, 189, 131, 0.16);
+  --input: rgba(95, 189, 131, 0.22);
+  --ring: rgba(95, 189, 131, 0.55);
+  --sidebar: #0E1310;
+  --sidebar-foreground: #F2F1E8;
+  --sidebar-primary: #5FBD83;
+  --sidebar-primary-foreground: #090C0A;
+  --sidebar-accent: #151B16;
+  --sidebar-accent-foreground: #A7E3BF;
+  --sidebar-border: rgba(95, 189, 131, 0.16);
+  --sidebar-ring: rgba(95, 189, 131, 0.55);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+  ::selection {
+    background: rgba(95, 189, 131, 0.85);
+    color: #090C0A;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #090C0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3E8E5F;
+  }
+  :focus-visible {
+    outline: 1px solid rgba(95, 189, 131, 0.8);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Tipografia editorial */
+  .font-display {
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  }
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Card de vidro escuro com borda dourada */
+  .glass-card {
+    background: linear-gradient(150deg, rgba(23, 19, 14, 0.82) 0%, rgba(9, 8, 6, 0.9) 100%);
+    border: 1px solid var(--line);
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition:
+      border-color 0.5s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s ease;
+  }
+  .glass-card:hover {
+    border-color: var(--line-strong);
+    box-shadow:
+      0 34px 80px rgba(0, 0, 0, 0.65),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      0 0 44px rgba(95, 189, 131, 0.07);
+  }
+
+  /* Zoom suave de imagem */
+  .img-zoom {
+    overflow: hidden;
+  }
+  .img-zoom img {
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .img-zoom:hover img,
+  .group:hover .img-zoom img {
+    transform: scale(1.055);
+  }
+
+  /* Divisor horizontal com losango central */
+  .rule-diamond {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .rule-diamond::before,
+  .rule-diamond::after {
+    content: "";
+    height: 1px;
+    flex: 0 0 3.5rem;
+    background: linear-gradient(to right, transparent, var(--line-strong));
+  }
+  .rule-diamond::after {
+    background: linear-gradient(to left, transparent, var(--line-strong));
+  }
+  .rule-diamond > i {
+    width: 7px;
+    height: 7px;
+    transform: rotate(45deg);
+    background: var(--gold);
+    flex: none;
+  }
+
+  /* Botões */
+  .btn-gold {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: linear-gradient(120deg, #6CC992, #4FA673 55%, #3E8E5F);
+    color: #06130C;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 1.125rem 2.375rem;
+    overflow: hidden;
+    transition:
+      color 0.45s ease,
+      box-shadow 0.45s ease,
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-gold::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, #0E1310, #151B16);
+    transform: translateX(-101%);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+  }
+  .btn-gold > * {
+    position: relative;
+    z-index: 1;
+  }
+  .btn-gold:hover {
+    color: var(--gold-light);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5), 0 0 30px rgba(95, 189, 131, 0.18);
+  }
+  .btn-gold:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn-outline {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 1px solid var(--line-strong);
+    color: var(--ivory);
+    background: transparent;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 1.125rem 2.375rem;
+    transition:
+      background 0.45s ease,
+      color 0.45s ease,
+      border-color 0.45s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(95, 189, 131, 0.1);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  /* Link dourado com seta */
+  .link-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .link-gold .arrow {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-gold:hover {
+    color: var(--gold-light);
+  }
+  .link-gold:hover .arrow {
+    transform: translateX(6px);
+  }
+
+  /* Campo de formulário */
+  .field {
+    width: 100%;
+    background: rgba(9, 8, 6, 0.6);
+    border: 1px solid rgba(95, 189, 131, 0.22);
+    color: var(--ivory);
+    font-size: 0.9375rem;
+    font-weight: 300;
+    padding: 0.9375rem 1.125rem;
+    transition:
+      border-color 0.35s ease,
+      background 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+  .field::placeholder {
+    color: rgba(164, 151, 127, 0.65);
+  }
+  .field:focus {
+    outline: none;
+    border-color: rgba(95, 189, 131, 0.6);
+    background: rgba(13, 11, 8, 0.85);
+    box-shadow: 0 0 0 1px rgba(95, 189, 131, 0.25);
+  }
+  .field-error {
+    border-color: rgba(192, 84, 60, 0.7) !important;
+  }
+
+  /* Moldura deslocada de imagem */
+  .frame-offset {
+    position: relative;
+  }
+  .frame-offset::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translate(1.5rem, 1.5rem);
+    border: 1px solid var(--line-strong);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ── Revelação ao rolar ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-fade {
+  transform: none;
+}
+.reveal-left {
+  transform: translateX(-40px);
+}
+.reveal-right {
+  transform: translateX(40px);
+}
+.reveal.is-visible.reveal-left,
+.reveal.is-visible.reveal-right {
+  transform: translateX(0);
+}
+
+/* Revelação de imagem em cortina */
+.reveal-curtain {
+  position: relative;
+  overflow: hidden;
+}
+.reveal-curtain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--background);
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform 1.25s cubic-bezier(0.7, 0, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  z-index: 2;
+}
+.reveal-curtain.is-visible::after {
+  transform: scaleY(0);
+}
+.reveal-curtain img {
+  opacity: 0;
+  transform: scale(1.12);
+  transition:
+    opacity 0.9s ease var(--reveal-delay, 0ms),
+    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+.reveal-curtain.is-visible img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Entrada do hero */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(44px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(7px);
+  }
+}
+@keyframes ken-burns {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.anim-hero-rise {
+  opacity: 0;
+  animation: hero-rise 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+.anim-hero-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: hero-line 1.4s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+.anim-ken-burns {
+  animation: ken-burns 3.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.anim-scroll-cue {
+  animation: soft-pulse 2.4s ease-in-out infinite;
+}
+
+/* Texto com gradiente dourado sutil (usar com moderação) */
+.text-gold-gradient {
+  background: linear-gradient(115deg, #A7E3BF 0%, #5FBD83 45%, #3E8E5F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .anim-hero-rise {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-curtain::after {
+    display: none !important;
+  }
+  .reveal-curtain img {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
